@@ -4,7 +4,7 @@
 
 prime :: Integer -> IO ()
 prime x = do
-    print (2^(x)*(2^(x+1)-1))
+    print (2^(x)-1)
 
 main :: IO ()
 main = do
