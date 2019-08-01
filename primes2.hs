@@ -7,27 +7,28 @@
 import Control.Monad
 import Control.Parallel
 
-innrprime :: Integer -> Integer -> IO ()
-innrprime z x =
-    if (z == (div x 2)) then
-        print x
-    else
-        if ((x `mod` z) == 0) then
-            return ()
+innrprime :: Integer -> Integer -> [Bool]
+innrprime n x =
+        if ((x `mod` n) == 0) then
+            [False]
         else
-            innrprime (z+1) x
+            [True]
 
-primes :: Integer -> IO ()
-primes x = do
+prime :: Integer -> [[Bool]]
+prime x = do
     let z = 2 :: Integer
-    innrprime z x
+    forM [z..x-1] $ \n -> innrprime n x
 
 loop :: Integer -> Integer -> IO ()
 loop x y =
     if (x > y) then
         return ()
-    else do
-        primes x
+    else
+        if (False `elem` (head (prime x))) then
+            loop (x+1) y
+        else do
+            print x
+            loop (x+1) y
 
 main :: IO ()
 main = do
@@ -36,5 +37,5 @@ main = do
     i <- getLine
     putStrLn "\n2"
     let y = read i :: Integer
-    let x = 2 :: Integer
-    forM_ [x..y] $ \n -> loop n y
+    let x = 3 :: Integer
+    loop x y
