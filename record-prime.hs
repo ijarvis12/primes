@@ -1,4 +1,4 @@
---compile with ghc -Ox -threaded --make primes2.hs [where x is # of threads]
+--compile with ghc -Ox -threaded --make record-prime.hs [where x is # of threads]
 --run with ./record-prime +RTS -Nx [where x is the number from above]
 
 --program that finds large prime numbers
@@ -47,7 +47,8 @@ loop x = do
         putStrLn " "
         putStrLn "PRIME!!!"
         putStrLn " "
-        writeFile "./prime.dat" (show y)
+        let s = "Power: " ++ (show x) ++ "\n" ++ "Prime: " ++ (show y) ++ "\n"
+        writeFile "./prime.dat" s
 
 --Main function, start here
 main :: IO ()
