@@ -34,7 +34,7 @@ print("The primes:")
 
 # find primes
 for n in range(2,maxn):
-    for p in range(2,n):
+    for p in range(2,n//2+1):
         if n%p == 0:
             break
     else:
