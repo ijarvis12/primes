@@ -17,7 +17,8 @@ innrprime n x =
 prime :: Integer -> [[Bool]]
 prime x = do
     let z = 2 :: Integer
-    forM [z..x-1] $ \n -> innrprime n x
+    let w = div x 2
+    forM [z..w] $ \n -> innrprime n x
 
 loop :: Integer -> Integer -> IO ()
 loop x y =
