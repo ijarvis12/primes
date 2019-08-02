@@ -4,7 +4,7 @@
 
 prime :: Integer -> IO ()
 prime x = do
-    let y = 2^(x)*(2^(x+1)-1)
+    let y = 2^x - 1
     print (length (show y))
 
 main :: IO ()
