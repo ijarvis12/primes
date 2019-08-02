@@ -21,6 +21,7 @@ def primes(numprocs,p,n,return_dict):
         for b in range(start,end):
             if n%b == 0:
                 return_dict[b] = False
+                break
 
 ##                                                  ##
 ## main process that spawns jobs for finding primes ##
