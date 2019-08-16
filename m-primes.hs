@@ -3,7 +3,7 @@
 --finds Mersenne primes
 
 prime :: Integer -> IO ()
-prime x = do
+prime x = 
     print (2^(x)-1)
 
 main :: IO ()
