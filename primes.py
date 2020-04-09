@@ -4,23 +4,23 @@
 # inputs: numprocs: number of processes running the function
 #                p: process number
 #                n: integer to see if prime
-#      return_dict: dictionary of return values
-def primes(numprocs,p,n,return_dict):
+#      return_list: dictionary of return values
+def primes(numprocs,p,n,return_list):
 
 #       variable start is the starting point to search from
-        start = n*p//(2*numprocs)
+        start = int(sqrt(n))*p//numprocs
         if start < 2:
             start = 2
         
 #       variable end is the ending point to search to
-        end = n*(p+1)//(2*numprocs)
+        end = int(sqrt(n))*(p+1)//numprocs
         if end < 2:
             end = 2
 
 #       do the grunt work
-        for b in range(start,end):
+        for b in range(start,end+1):
             if n%b == 0:
-                return_dict[b] = False
+                return_list.append(False)
                 break
 
 ##                                                  ##
@@ -29,6 +29,7 @@ def primes(numprocs,p,n,return_dict):
 if __name__ == '__main__':
 
     import multiprocessing
+    from math import sqrt
 
 #   number of processes the computer has
     numprocs = multiprocessing.cpu_count()
@@ -60,19 +61,21 @@ if __name__ == '__main__':
         exit()
 
     print("The primes:")
-
-#   shared dictionary between processes
-    return_dict = multiprocessing.Manager().dict()
+    
+    print(2)
 
 #   start loop to find primes
     for n in range(2,maxn):
 
-#       start multiprocessing jobs
+#       multiprocessing jobs
         jobs = []
-        return_dict.clear()
         
+#       shared list between processes
+        return_list = multiprocessing.Manager().list()
+    
+#       start jobs
         for p in range(numprocs):
-            job = multiprocessing.Process(target=primes, args=(numprocs,p,n,return_dict,))
+            job = multiprocessing.Process(target=primes, args=(numprocs,p,n,return_list,))
             jobs.append(job)
             job.start()
 
@@ -81,15 +84,15 @@ if __name__ == '__main__':
             job.join()
 
 #       first check if return_dict has anything (numprocs may be too high)
-        if len(return_dict) == 0:
-            for b in range(2,n//2):
+        if len(return_list) == 0:
+            for b in range(2,int(sqrt(n))+1):
                 if n%b == 0:
-                    return_dict[b] = False
-            if len(return_dict) == 0:
-                return_dict[0] = True
+                    return_list.append(False)
+            if len(return_list) == 0:
+                return_list.append(True)
 
 #       print number if prime        
-        if False in return_dict.values():
+        if False in return_list:
             pass
         else:
             print(n)

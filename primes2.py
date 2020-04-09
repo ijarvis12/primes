@@ -3,6 +3,9 @@
 ##                                  ##
 ## program that finds prime numbers ##
 ##                                  ##
+
+from math import sqrt
+
 print("")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print(" This program finds prime numbers ")
@@ -34,7 +37,7 @@ print("The primes:")
 
 # find primes
 for n in range(2,maxn):
-    for p in range(2,n//2+1):
+    for p in range(2,int(sqrt(n))+1):
         if n%p == 0:
             break
     else:
