@@ -19,7 +19,7 @@ def primes(numprocs,p,n,return_list):
 
 #       do the grunt work
         for b in range(start,end+1):
-            if n%b == 0:
+            if n % b == 0:
                 return_list.append(False)
                 break
 
@@ -45,14 +45,22 @@ if __name__ == '__main__':
     print(2)
 
 #   starting Mersenne prime power
-    x = 2
+    x = 1
 
 #   start loop to find primes
     while True:
+        
+#       iterate Mersenne prime power
+        x += 1
     
 #       Mersenne prime
         n = 2**x - 1
 
+#       first a sanity check on n (numprocs may be too high)
+        if int(sqrt(n)) < numprocs:
+                print(n,"is too small to properly compute")
+                continue
+        
 #       multiprocessing jobs
         jobs = []
 
@@ -69,20 +77,8 @@ if __name__ == '__main__':
         for job in jobs:
             job.join()
 
-#       first check if return_dict has anything (numprocs may be too high)
-        if len(return_list) == 0:
-            for b in range(2,int(sqrt(n))+1):
-                if n%b == 0:
-                    return_list.append(False)
-            if len(return_list) == 0:
-                return_list.append(True)
-
 #       print number if prime        
         if False in return_list:
             pass
         else:
             print(n)
-
-#       iterate Mersenne prime power
-        x += 1
-
