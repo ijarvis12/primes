@@ -55,7 +55,7 @@ if __name__ == '__main__':
         exit()
 
 #   check maxn to see if it's sane
-    if maxn < 2:
+    if int(sqrt(maxn)) < numprocs - 1:
         print("Bad input")
         garbage = input("Press <Enter> to end program")
         exit()
@@ -67,6 +67,11 @@ if __name__ == '__main__':
 #   start loop to find primes
     for n in range(2,maxn):
 
+#       first check if n is too small, if so skip
+        if numprocs > int(sqrt(n)):
+                print(n,"is to small to compute properly")
+                continue
+        
 #       multiprocessing jobs
         jobs = []
         
@@ -82,14 +87,6 @@ if __name__ == '__main__':
 #       wait for jobs to finish
         for job in jobs:
             job.join()
-
-#       first check if return_dict has anything (numprocs may be too high)
-#       else if numprocs is not too high, add a single True
-        if len(return_list) == 0:
-                if numprocs > sqrt(n)*p:
-                        pass
-        else:
-            return_list.append(True)
 
 #       print number if prime        
         if False in return_list:
