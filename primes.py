@@ -19,7 +19,7 @@ def primes(numprocs,p,n,return_list):
 
 #       do the grunt work
         for b in range(start,end+1):
-            if n%b == 0:
+            if n % b == 0:
                 return_list.append(False)
                 break
 
@@ -84,12 +84,12 @@ if __name__ == '__main__':
             job.join()
 
 #       first check if return_dict has anything (numprocs may be too high)
+#       else if numprocs is not too high, add a single True
         if len(return_list) == 0:
-            for b in range(2,int(sqrt(n))+1):
-                if n%b == 0:
-                    return_list.append(False)
-            if len(return_list) == 0:
-                return_list.append(True)
+                if numprocs > sqrt(n)*p:
+                        pass
+        else:
+            return_list.append(True)
 
 #       print number if prime        
         if False in return_list:
