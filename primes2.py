@@ -38,7 +38,7 @@ print("The primes:")
 # find primes
 for n in range(2,maxn):
     for p in range(2,int(sqrt(n))+1):
-        if n%p == 0:
+        if n % p == 0:
             break
     else:
         print(n)
