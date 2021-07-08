@@ -4,7 +4,7 @@
 # inputs: numprocs: number of processes running the function
 #                p: process number
 #                n: integer to see if prime
-#      return_list: dictionary of return values
+#      return_list: list of return values
 def primes(numprocs,p,n,return_list):
 
 #       variable start is the starting point to search from
