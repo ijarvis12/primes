@@ -9,7 +9,7 @@ prime x = do
 
 main :: IO ()
 main = do
-    putStrLn "Finding Mersenne prime..."
+    putStrLn "Finding Mersenne prime digits length..."
     putStrLn "Enter power:"
     i <- getLine
     putStrLn " "
