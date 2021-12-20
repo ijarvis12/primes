@@ -17,7 +17,7 @@ primework n y = do
     else
         [True]
 
---Find value to make computation faster, then start computing!
+--Find limits to make computation faster, then start computing!
 startprimes :: Integer -> [[Bool]]
 startprimes y = do
     --starting value to modulo on
