@@ -23,7 +23,7 @@ startprimes y = do
     --starting value to modulo on
     let z = 2 :: Integer
     --upper limit of modulo need to check
-    let w = floor ((sqrt y) + 1/2)
+    let w = round (sqrt y) :: Integer
     --do the work of finding the prime
     forM [z..w] $ \n -> primework n y
 
