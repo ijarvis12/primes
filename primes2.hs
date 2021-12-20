@@ -17,7 +17,7 @@ innrprime n x =
 prime :: Integer -> [[Bool]]
 prime x = do
     let z = 2 :: Integer
-    let w = floor ((sqrt x) + 1/2)
+    let w = round (sqrt x) :: Integer
     forM [z..w] $ \n -> innrprime n x
 
 loop :: Integer -> Integer -> IO ()
