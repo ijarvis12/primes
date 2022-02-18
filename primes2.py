@@ -22,7 +22,7 @@ if len(maxn) > 0:
         maxn = int(maxn)
     except:
         print("Bad input")
-        garbage = input("Press <Enter> to end program")
+        _ = input("Press <Enter> to end program")
         exit()
 else:
     exit()
@@ -30,7 +30,7 @@ else:
 # check if maxn is sane
 if maxn <= 1:
     print("Bad input")
-    garbage = input("Press <Enter> to end program")
+    _ = input("Press <Enter> to end program")
     exit()
 
 print("The primes:")
@@ -43,4 +43,4 @@ for n in range(2,maxn):
     else:
         print(n)
 
-garbage = input("Press <Enter> to end program")
+_ = input("Press <Enter> to end program")
