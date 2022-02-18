@@ -49,7 +49,7 @@ if __name__ == '__main__':
             maxn = int(maxn)
         except:
             print("Bad input")
-            garbage = input("Press <Enter> to end program")
+            _ = input("Press <Enter> to end program")
             exit()
     else:
         exit()
@@ -57,7 +57,7 @@ if __name__ == '__main__':
 #   check maxn to see if it's sane
     if int(sqrt(maxn)) < numprocs - 1:
         print("Bad input")
-        garbage = input("Press <Enter> to end program")
+        _ = input("Press <Enter> to end program")
         exit()
 
     print("The primes:")
@@ -94,4 +94,4 @@ if __name__ == '__main__':
         else:
             print(n)
 
-    garbage = input("Press <Enter> to end program")
+    _ = input("Press <Enter> to end program")
