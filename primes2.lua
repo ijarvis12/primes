@@ -43,11 +43,11 @@ print("The primes:")
 
 --[[ find primes --]]
 for n = 2,maxn,1 do
-    for p = 2,math.ceil(math.sqrt(n)),1 do
+    for p = 2,m.ceil(math.sqrt(n)),1 do
         if n % p == 0 then
             break
         end
-    if p == math.ceil(math.sqrt(n)) then
+    if p == m.ceil(math.sqrt(n)) then
         print(n)
     end
     end
