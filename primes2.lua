@@ -2,7 +2,7 @@
 
 --[[ program that finds prime numbers --]]
 
-m = require("math")
+require("math")
 
 print("")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -43,13 +43,15 @@ print("The primes:")
 
 --[[ find primes --]]
 for n = 2,maxn,1 do
-    for p = 2,m.ceil(math.sqrt(n)),1 do
+    nope = true
+    for p = 2,math.ceil(math.sqrt(n)),1 do
         if n % p == 0 then
+            nope = false
             break
         end
-    if p == m.ceil(math.sqrt(n)) then
-        print(n)
     end
+    if nope then
+        print(n)
     end
 end
 
