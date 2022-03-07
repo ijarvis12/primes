@@ -23,14 +23,14 @@ extern "C" {
 static int lcf1_maxnToNum (lua_State * L) {
   enum { lc_nformalargs = 0 };
   lua_settop(L,0);
-  
+
   /* maxn = tonumber(maxn) */
   lua_getfield(L,LUA_ENVIRONINDEX,"tonumber");
   lua_getfield(L,LUA_ENVIRONINDEX,"maxn");
   lua_call(L,1,1);
   lua_setfield(L,LUA_ENVIRONINDEX,"maxn");
   assert(lua_gettop(L) == 0);
-  
+
   /* return true */
   lua_pushboolean(L,1);
   return 1;
@@ -96,51 +96,50 @@ static int lcf_main (lua_State * L) {
   enum { lc_nformalargs = 0 };
   const int lc_nactualargs = lua_gettop(L);
   const int lc_nextra = (lc_nactualargs - lc_nformalargs);
-  
+
   /* --[[ program that finds prime numbers --]]
-   * m = require("math") */
+   * require("math") */
   lua_getfield(L,LUA_ENVIRONINDEX,"require");
   lua_pushliteral(L,"math");
-  lua_call(L,1,1);
-  lua_setfield(L,LUA_ENVIRONINDEX,"m");
+  lua_call(L,1,0);
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* print("") */
   lua_getfield(L,LUA_ENVIRONINDEX,"print");
   lua_pushliteral(L,"");
   lua_call(L,1,0);
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~") */
   lua_getfield(L,LUA_ENVIRONINDEX,"print");
   lua_pushliteral(L,"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   lua_call(L,1,0);
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* print(" This program finds prime numbers ") */
   lua_getfield(L,LUA_ENVIRONINDEX,"print");
   lua_pushliteral(L," This program finds prime numbers ");
   lua_call(L,1,0);
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~") */
   lua_getfield(L,LUA_ENVIRONINDEX,"print");
   lua_pushliteral(L,"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   lua_call(L,1,0);
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* print("") */
   lua_getfield(L,LUA_ENVIRONINDEX,"print");
   lua_pushliteral(L,"");
   lua_call(L,1,0);
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* print("Enter max number to search to:") */
   lua_getfield(L,LUA_ENVIRONINDEX,"print");
   lua_pushliteral(L,"Enter max number to search to:");
   lua_call(L,1,0);
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* --[[ variable maxn is the maximum number that the program with search primes (starts at 2) --]]
    * maxn = io.read() */
   lua_getfield(L,LUA_ENVIRONINDEX,"io");
@@ -150,7 +149,7 @@ static int lcf_main (lua_State * L) {
   lua_call(L,0,1);
   lua_setfield(L,LUA_ENVIRONINDEX,"maxn");
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* --[[ check to see if input, attempt to make it into integer, else exit --]]
    * if #maxn > 0 then */
   enum { lc1 = 0 };
@@ -165,20 +164,20 @@ static int lcf_main (lua_State * L) {
   const int lc4 = lua_toboolean(L,-1);
   lua_pop(L,1);
   if (lc4) {
-    
+
     /* local function maxnToNum()
      *         maxn = tonumber(maxn)
      *         return true
      *     end */
     lua_pushcfunction(L,lcf1_maxnToNum);
     assert(lua_gettop(L) - lc_nextra == 1);
-    
+
     /* local err = pcall(maxnToNum) */
     lua_getfield(L,LUA_ENVIRONINDEX,"pcall");
     lua_pushvalue(L,(1 + lc_nextra));
     lua_call(L,1,1);
     assert(lua_gettop(L) - lc_nextra == 2);
-    
+
     /* if err == false then */
     enum { lc5 = 2 };
     lua_pushboolean(L,0);
@@ -188,19 +187,19 @@ static int lcf_main (lua_State * L) {
     const int lc7 = lua_toboolean(L,-1);
     lua_pop(L,1);
     if (lc7) {
-      
+
       /* print("Bad input") */
       lua_getfield(L,LUA_ENVIRONINDEX,"print");
       lua_pushliteral(L,"Bad input");
       lua_call(L,1,0);
       assert(lua_gettop(L) - lc_nextra == 2);
-      
+
       /* print("Press <Enter> to end program") */
       lua_getfield(L,LUA_ENVIRONINDEX,"print");
       lua_pushliteral(L,"Press <Enter> to end program");
       lua_call(L,1,0);
       assert(lua_gettop(L) - lc_nextra == 2);
-      
+
       /* _ = io.read() */
       lua_getfield(L,LUA_ENVIRONINDEX,"io");
       lua_pushliteral(L,"read");
@@ -209,7 +208,7 @@ static int lcf_main (lua_State * L) {
       lua_call(L,0,1);
       lua_setfield(L,LUA_ENVIRONINDEX,"_");
       assert(lua_gettop(L) - lc_nextra == 2);
-      
+
       /* os.exit() */
       lua_getfield(L,LUA_ENVIRONINDEX,"os");
       lua_pushliteral(L,"exit");
@@ -222,7 +221,7 @@ static int lcf_main (lua_State * L) {
     assert(lua_gettop(L) - lc_nextra == 2);
   }
   else {
-    
+
     /* else
      * os.exit() */
     lua_getfield(L,LUA_ENVIRONINDEX,"os");
@@ -234,7 +233,7 @@ static int lcf_main (lua_State * L) {
   }
   lua_settop(L,(lc1 + lc_nextra));
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* --[[ check if maxn is sane --]]
    * if maxn <= 1 then */
   enum { lc8 = 0 };
@@ -246,19 +245,19 @@ static int lcf_main (lua_State * L) {
   const int lc10 = lua_toboolean(L,-1);
   lua_pop(L,1);
   if (lc10) {
-    
+
     /* print("Bad input") */
     lua_getfield(L,LUA_ENVIRONINDEX,"print");
     lua_pushliteral(L,"Bad input");
     lua_call(L,1,0);
     assert(lua_gettop(L) - lc_nextra == 0);
-    
+
     /* print("Press <Enter> to end program") */
     lua_getfield(L,LUA_ENVIRONINDEX,"print");
     lua_pushliteral(L,"Press <Enter> to end program");
     lua_call(L,1,0);
     assert(lua_gettop(L) - lc_nextra == 0);
-    
+
     /* _ = io.read() */
     lua_getfield(L,LUA_ENVIRONINDEX,"io");
     lua_pushliteral(L,"read");
@@ -267,7 +266,7 @@ static int lcf_main (lua_State * L) {
     lua_call(L,0,1);
     lua_setfield(L,LUA_ENVIRONINDEX,"_");
     assert(lua_gettop(L) - lc_nextra == 0);
-    
+
     /* os.exit() */
     lua_getfield(L,LUA_ENVIRONINDEX,"os");
     lua_pushliteral(L,"exit");
@@ -278,13 +277,13 @@ static int lcf_main (lua_State * L) {
   }
   lua_settop(L,(lc8 + lc_nextra));
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* print("The primes:") */
   lua_getfield(L,LUA_ENVIRONINDEX,"print");
   lua_pushliteral(L,"The primes:");
   lua_call(L,1,0);
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* --[[ find primes --]]
    * for n = 2,maxn,1 do */
   lua_pushnumber(L,2);
@@ -299,10 +298,15 @@ static int lcf_main (lua_State * L) {
   lua_pop(L,3);
   enum { lc14 = 0 };
   while ((((lc13_step > 0) && (lc11_var <= lc12_limit)) || ((lc13_step <= 0) && (lc11_var >= lc12_limit)))) {
-    
+
     /* internal: local n at index 1 */
     lua_pushnumber(L,lc11_var);
-    
+
+    /* nope = true */
+    lua_pushboolean(L,1);
+    lua_setfield(L,LUA_ENVIRONINDEX,"nope");
+    assert(lua_gettop(L) - lc_nextra == 1);
+
     /* for p = 2,math.ceil(math.sqrt(n)),1 do */
     lua_pushnumber(L,2);
     lua_getfield(L,LUA_ENVIRONINDEX,"math");
@@ -327,10 +331,10 @@ static int lcf_main (lua_State * L) {
     lua_pop(L,3);
     enum { lc19 = 1 };
     while ((((lc17_step > 0) && (lc15_var <= lc16_limit)) || ((lc17_step <= 0) && (lc15_var >= lc16_limit)))) {
-      
+
       /* internal: local p at index 2 */
       lua_pushnumber(L,lc15_var);
-      
+
       /* if n % p == 0 then */
       enum { lc20 = 2 };
       lc_mod(L,(1 + lc_nextra),(2 + lc_nextra));
@@ -341,64 +345,55 @@ static int lcf_main (lua_State * L) {
       const int lc22 = lua_toboolean(L,-1);
       lua_pop(L,1);
       if (lc22) {
-        
+
+        /* nope = false */
+        lua_pushboolean(L,0);
+        lua_setfield(L,LUA_ENVIRONINDEX,"nope");
+        assert(lua_gettop(L) - lc_nextra == 2);
+
         /* break */
         break;
         assert(lua_gettop(L) - lc_nextra == 2);
       }
       lua_settop(L,(lc20 + lc_nextra));
       assert(lua_gettop(L) - lc_nextra == 2);
-      
-      /* if p == math.ceil(math.sqrt(n)) then */
-      enum { lc23 = 2 };
-      lua_getfield(L,LUA_ENVIRONINDEX,"math");
-      lua_pushliteral(L,"ceil");
-      lua_gettable(L,-2);
-      lua_remove(L,-2);
-      const int lc24 = lua_gettop(L);
-      lua_getfield(L,LUA_ENVIRONINDEX,"math");
-      lua_pushliteral(L,"sqrt");
-      lua_gettable(L,-2);
-      lua_remove(L,-2);
-      lua_pushvalue(L,(1 + lc_nextra));
-      lua_call(L,1,LUA_MULTRET);
-      lua_call(L,(lua_gettop(L) - lc24),1);
-      const int lc25 = lua_equal(L,(2 + lc_nextra),-1);
-      lua_pop(L,1);
-      lua_pushboolean(L,lc25);
-      const int lc26 = lua_toboolean(L,-1);
-      lua_pop(L,1);
-      if (lc26) {
-        
-        /* print(n) */
-        lua_getfield(L,LUA_ENVIRONINDEX,"print");
-        lua_pushvalue(L,(1 + lc_nextra));
-        lua_call(L,1,0);
-        assert(lua_gettop(L) - lc_nextra == 2);
-      }
-      lua_settop(L,(lc23 + lc_nextra));
-      assert(lua_gettop(L) - lc_nextra == 2);
-      
+
       /* internal: stack cleanup on scope exit */
       lua_pop(L,1);
       lc15_var += lc17_step;
     }
     lua_settop(L,(lc19 + lc_nextra));
     assert(lua_gettop(L) - lc_nextra == 1);
-    
+
+    /* if nope then */
+    enum { lc23 = 1 };
+    lua_getfield(L,LUA_ENVIRONINDEX,"nope");
+    const int lc24 = lua_toboolean(L,-1);
+    lua_pop(L,1);
+    if (lc24) {
+
+      /* print(n) */
+      lua_getfield(L,LUA_ENVIRONINDEX,"print");
+      lua_pushvalue(L,(1 + lc_nextra));
+      lua_call(L,1,0);
+      assert(lua_gettop(L) - lc_nextra == 1);
+    }
+    lua_settop(L,(lc23 + lc_nextra));
+    assert(lua_gettop(L) - lc_nextra == 1);
+
     /* internal: stack cleanup on scope exit */
     lua_pop(L,1);
     lc11_var += lc13_step;
   }
   lua_settop(L,(lc14 + lc_nextra));
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* print("Press <Enter> to end program") */
   lua_getfield(L,LUA_ENVIRONINDEX,"print");
   lua_pushliteral(L,"Press <Enter> to end program");
   lua_call(L,1,0);
   assert(lua_gettop(L) - lc_nextra == 0);
-  
+
   /* _ = io.read() */
   lua_getfield(L,LUA_ENVIRONINDEX,"io");
   lua_pushliteral(L,"read");
@@ -542,5 +537,3 @@ int main(int argc, const char ** argv) {
   lua_close(L);
   return 0;
 }
-
-
