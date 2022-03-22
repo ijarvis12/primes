@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # function primes finds the prime numbers given inputs
 # inputs: numprocs: number of processes running the function
