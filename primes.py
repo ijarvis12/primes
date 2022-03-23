@@ -22,6 +22,7 @@ def primes(numprocs,p,n,return_list):
             if n % b == 0:
                 return_list.append(False)
                 break
+        return
 
 ##                                                  ##
 ## main process that spawns jobs for finding primes ##
