@@ -21,7 +21,7 @@ if #maxn > 0 then
         return true
     end
     local err = pcall(maxnToNum)
-    if err == false then
+    if not(err) then
         print("Bad input")
         print("Press <Enter> to end program")
         _ = io.read()
