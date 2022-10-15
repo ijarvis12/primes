@@ -27,11 +27,11 @@ while x<1000:
 	with torch.cuda.device()
 
 #       Mersenne prime
-		n = torch.tensor(2**x - 1).cuda()
+		n = torch.tensor((2<<x) - 1).cuda()
 		bl = torch.tensor(0, device=cuda)
 	
 #       do the grunt work
-		for i in range(start,int(sqrt(n))+1):
+		for i in range(start,int(sqrt(n.item()))+1):
 			if n % i == 0:
 				bl = 1
 				break
