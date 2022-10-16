@@ -24,7 +24,7 @@ while x<1000:
 #   iterate Mersenne prime power
 	x += 1
 	
-	with torch.cuda.device()
+	with torch.cuda.device(cuda):
 
 #       Mersenne prime
 		n = torch.tensor((2<<x) - 1).cuda()
