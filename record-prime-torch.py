@@ -21,26 +21,27 @@ x = 1
 # start loop to find primes
 while x<1000:
 	
-#   iterate Mersenne prime power
+#	iterate Mersenne prime power
 	x += 1
 	
+#	use gpu
 	with torch.cuda.device(cuda):
 
-#       Mersenne prime
-		n = torch.tensor((2<<x) - 1).cuda()
+#		Mersenne prime
+		n = torch.tensor((1<<x) - 1).cuda()
 		bl = torch.tensor(0, device=cuda)
 	
-#       do the grunt work
+#		do the grunt work
 		for i in range(start,int(sqrt(n.item()))+1):
 			if n % i == 0:
 				bl = 1
 				break
 		
-#       send vars to cpu for displaying
+#		send vars to cpu for displaying
 		bl.to(device=cpu)
 		n.to(device=cpu)
 		
-#   print number if prime        
+#	print number if prime        
 	if bl.item() == 1:
 		pass
 	else:
