@@ -32,7 +32,8 @@ while x<1000:
 		bl = torch.tensor(0, device=cuda)
 	
 #		do the grunt work
-		for i in range(start,int(sqrt(n.item()))+1):
+		end = int(sqrt(n.item())) + 1
+		for i in range(2,end):
 			if n % i == 0:
 				bl = 1
 				break
