@@ -13,7 +13,8 @@ primes n x end True = return ()
 loop :: Integer -> Integer -> Integer -> IO ()
 loop x y 0 = return ()
 loop x y end = do
-    primes 2 x (ceiling (sqrt (fromIntegral x :: Float))) False
+    let z = toInteger (ceiling (sqrt (fromIntegral x :: Float)))
+    primes 2 x z False
     loop (x+1) y (end-1)
 
 main :: IO ()
