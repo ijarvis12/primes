@@ -3,19 +3,19 @@
 --program that finds prime numbers
 
 check :: Integer -> Integer -> Bool
-check n x = (mod x n) == 0
+check x n = (mod x n) == 0
 
-primes :: Integer -> Integer -> Integer -> Bool -> IO ()
-primes n x 1 False = print x
-primes n x end False = primes (n+1) x (end-1) (check n x)
-primes n x end True = return ()
+primes :: Integer -> Integer -> Bool -> IO ()
+primes x 1 False = print x
+primes x end False = primes x (end-1) (check x end)
+primes x end True = return ()
 
-loop :: Integer -> Integer -> Integer -> IO ()
-loop x y 2 = return ()
-loop x y end = do
+loop :: Integer -> Integer -> IO ()
+loop x 2 = return ()
+loop x end = do
     let z = toInteger (ceiling (sqrt (fromIntegral x :: Float)))
-    primes 2 x z False
-    loop (x+1) y (end-1)
+    primes x z False
+    loop (x+1) (end-1)
 
 main :: IO ()
 main = do
@@ -24,4 +24,4 @@ main = do
     i <- getLine
     putStrLn "\n2\n3"
     let y = read i :: Integer
-    loop 4 y y
+    loop 4 y
