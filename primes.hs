@@ -3,15 +3,15 @@
 --program that finds prime numbers
 
 check :: Integer -> Integer -> Bool
-check n x = mod x n == 0
+check n x = (mod x n) == 0
 
 primes :: Integer -> Integer -> Integer -> Bool -> IO ()
-primes n x 0 False = print x
+primes n x 1 False = print x
 primes n x end False = primes (n+1) x (end-1) (check n x)
 primes n x end True = return ()
 
 loop :: Integer -> Integer -> Integer -> IO ()
-loop x y 1 = return ()
+loop x y 2 = return ()
 loop x y end = do
     let z = toInteger (ceiling (sqrt (fromIntegral x :: Float)))
     primes 2 x z False
