@@ -11,7 +11,7 @@ primes n x end False = primes (n+1) x (end-1) (check n x)
 primes n x end True = return ()
 
 loop :: Integer -> Integer -> Integer -> IO ()
-loop x y 0 = return ()
+loop x y 1 = return ()
 loop x y end = do
     let z = toInteger (ceiling (sqrt (fromIntegral x :: Float)))
     primes 2 x z False
