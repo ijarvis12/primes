@@ -13,7 +13,7 @@ primes x end True = return ()
 loop :: Integer -> Integer -> IO ()
 loop x 2 = return ()
 loop x end = do
-    let z = toInteger (ceiling (sqrt (fromIntegral x :: Float)))
+    let z = toInteger (ceiling (sqrt (fromIntegral x)))
     primes x z False
     loop (x+1) (end-1)
 
