@@ -2,10 +2,7 @@
 
 --program that finds number of digits of Mersenne primes
 
-prime :: Integer -> IO ()
-prime x = do
-    let y = 2^x - 1
-    print (length (show y))
+import Data.Bits
 
 main :: IO ()
 main = do
@@ -13,5 +10,6 @@ main = do
     putStrLn "Enter power:"
     i <- getLine
     putStrLn " "
-    let x = read i :: Integer
-    prime x
+    let x = read i :: Int
+    let y = ((shiftL 1 x) :: Integer) - 1
+    print (length (show y))
