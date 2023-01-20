@@ -8,10 +8,10 @@ check x n = (mod x n) == 0
 primes :: Integer -> Integer -> Bool -> IO ()
 primes x 1 False = print x
 primes x end False = primes x (end-1) (check x end)
-primes x end True = return ()
+primes _ _ True = return ()
 
 loop :: Integer -> Integer -> IO ()
-loop x 2 = return ()
+loop _ 2 = return ()
 loop x end = do
     let z = toInteger (ceiling (sqrt (fromIntegral x)))
     primes x z False
