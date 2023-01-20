@@ -2,14 +2,16 @@
 
 --program that finds prime numbers
 
-import Control.Monad
-
 check :: Integer -> Integer -> Bool
 check x n = (mod x n) == 0
 
-check2 :: Integer -> [Integer] -> Bool -> [Integer]
-check2 x lst False = lst
-check2 x lst True = lst ++ [x]
+check2 :: Integer -> Bool -> IO ()
+check2 x True = print x
+check2 x False = return ()
+
+check3 :: Integer -> [Integer] -> Bool -> [Integer]
+check3 x lst False = lst
+check3 x lst True = lst ++ [x]
 
 sieve :: Integer -> Integer -> Integer -> [Integer] -> Bool -> Bool
 sieve _ 0 _ [] False = True
@@ -23,8 +25,8 @@ loop x 3 lst = return ()
 loop x end lst = do
     let z = toInteger (ceiling (sqrt (fromIntegral x)))
     let b = sieve x (mod (last lst) z) z lst False
-    when b $ print x
-    loop (x+1) (end-1) (check2 x lst b)
+    check2 x b
+    loop (x+1) (end-1) (check3 x lst b)
 
 main :: IO ()
 main = do
