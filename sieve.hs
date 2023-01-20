@@ -7,7 +7,7 @@ check x n = (mod x n) == 0
 
 check2 :: Integer -> Bool -> IO ()
 check2 x True = print x
-check2 x False = return ()
+check2 _ False = return ()
 
 check3 :: Integer -> [Integer] -> Bool -> [Integer]
 check3 x lst False = lst
@@ -21,7 +21,7 @@ sieve _ _ _ lst True = False
 sieve x y z lst False = sieve x y z (tail lst) (check x (head lst))
 
 loop :: Integer -> Integer -> [Integer]-> IO ()
-loop x 3 lst = return ()
+loop _ 3 _ = return ()
 loop x end lst = do
     let z = toInteger (ceiling (sqrt (fromIntegral x)))
     let b = sieve x (mod (last lst) z) z lst False
