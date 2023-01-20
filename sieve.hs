@@ -5,13 +5,13 @@
 check :: Integer -> Integer -> Bool
 check x n = (mod x n) == 0
 
-check2 :: Integer -> Bool -> IO ()
-check2 x True = print x
-check2 _ False = return ()
+prnt :: Integer -> Bool -> IO ()
+prnt x True = print x
+prnt _ False = return ()
 
-check3 :: Integer -> [Integer] -> Bool -> [Integer]
-check3 x lst False = lst
-check3 x lst True = lst ++ [x]
+additem :: Integer -> [Integer] -> Bool -> [Integer]
+additem x lst False = lst
+additem x lst True = lst ++ [x]
 
 sieve :: Integer -> Integer -> Integer -> [Integer] -> Bool -> Bool
 sieve _ 0 _ [] False = True
@@ -25,8 +25,8 @@ loop _ 3 _ = return ()
 loop x end lst = do
     let z = toInteger (ceiling (sqrt (fromIntegral x)))
     let b = sieve x (mod (last lst) z) z lst False
-    check2 x b
-    loop (x+1) (end-1) (check3 x lst b)
+    prnt x b
+    loop (x+1) (end-1) (additem x lst b)
 
 main :: IO ()
 main = do
