@@ -10,14 +10,13 @@ prnt x True = print x
 prnt _ False = return ()
 
 additem :: Integer -> [Integer] -> Bool -> [Integer]
-additem x lst False = lst
+additem _ lst False = lst
 additem x lst True = lst ++ [x]
 
 sieve :: Integer -> Integer -> Integer -> [Integer] -> Bool -> Bool
 sieve _ 0 _ [] False = True
-sieve _ _ _ [] True = False
+sieve _ _ _ _ True = False
 sieve x y z [] False = sieve x (y-1) (z-1) [] (check x z)
-sieve _ _ _ lst True = False
 sieve x y z lst False = sieve x y z (tail lst) (check x (head lst))
 
 loop :: Integer -> Integer -> [Integer]-> IO ()
