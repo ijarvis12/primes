@@ -18,6 +18,7 @@ read maxn
 # check if maxn is sane
 if [[ $maxn -le 1 ]]; then
     echo "Bad input"
+    exit 1
 fi
 
 echo "The primes:"
