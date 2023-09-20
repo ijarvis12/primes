@@ -25,7 +25,7 @@ loop x end lst = do
     let b = sieve x lst False
     let c = null [y | y <- [(last lst)..z], mod x y == 0 ]
     prnt x (b&&c)
-    loop (x+2) (end-2) (additem x lst (b&&c))
+    loop (x+1) (end-1) (additem x lst (b&&c))
 
 main :: IO ()
 main = do
@@ -34,4 +34,4 @@ main = do
     i <- getLine
     putStrLn "\n2\n3"
     let z = read i :: Integer
-    loop 5 z [2,3]
+    loop 4 z [2,3]
