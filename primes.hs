@@ -6,7 +6,7 @@ isPrime :: Integer -> Bool
 isPrime x = null [y | y <- [2..(ceiling (sqrt (fromIntegral x)))], mod x y == 0 ]
 
 prnt :: Integer -> Bool -> IO ()
-prnt x False = return ()
+prnt _ False = return ()
 prnt x True = print x
 
 loop :: Integer -> Integer -> IO ()
