@@ -11,9 +11,7 @@ prnt x True = print x
 
 loop :: Integer -> Integer -> IO ()
 loop _ 2 = return ()
-loop x end = do
-    prnt x (isPrime x)
-    loop (x+1) (end-1)
+loop x end = do {prnt x (isPrime x); loop (x+1) (end-1)}
 
 main :: IO ()
 main = do
