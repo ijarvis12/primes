@@ -25,4 +25,4 @@ main = do
     putStrLn "Enter max number to search to:"
     i <- getLine
     let z = read i :: Integer
-    loop 4 (abs z) [2,3]
+    loop 4 (max (abs z) 4) [2,3]
