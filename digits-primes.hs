@@ -11,5 +11,5 @@ main = do
     i <- getLine
     putStrLn " "
     let x = read i :: Int
-    let y = ((shiftL 1 x) :: Integer) - 1
+    let y = ((shiftL 1 (abs x)) :: Integer) - 1
     print (length (show y))
