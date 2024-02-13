@@ -17,7 +17,7 @@ sieve x lst False = sieve x (tail lst) (check x (head lst))
 
 loop :: Integer -> Integer -> [Integer]-> IO ()
 loop _ 3 lst = print lst
-loop x end lst = loop (x+1) (abs (end-1)) (additem x lst (sieve x lst False))
+loop x end lst = loop (x+1) (end-1) (additem x lst (sieve x lst False))
 
 main :: IO ()
 main = do
@@ -25,4 +25,4 @@ main = do
     putStrLn "Enter max number to search to:"
     i <- getLine
     let z = read i :: Integer
-    loop 4 z [2,3]
+    loop 4 (abs z) [2,3]
