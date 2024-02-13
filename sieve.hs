@@ -21,11 +21,9 @@ sieve x lst False = sieve x (tail lst) (check x (head lst))
 loop :: Integer -> Integer -> [Integer]-> IO ()
 loop _ 3 _ = return ()
 loop x end lst = do
-    let z = toInteger (ceiling (sqrt (fromIntegral x)))
     let b = sieve x lst False
-    let c = null [y | y <- [(last lst)..z], mod x y == 0 ]
-    prnt x (b&&c)
-    loop (x+1) (end-1) (additem x lst (b&&c))
+    prnt x b
+    loop (x+1) (end-1) (additem x lst b)
 
 main :: IO ()
 main = do
