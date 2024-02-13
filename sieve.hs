@@ -1,13 +1,10 @@
 #!/usr/bin/env runhaskell
 
 --program that finds prime numbers
+--using the Sieve of Eratosthenes
 
 check :: Integer -> Integer -> Bool
 check x n = (mod x n) == 0
-
-prnt :: Integer -> Bool -> IO ()
-prnt x True = print x
-prnt _ False = return ()
 
 additem :: Integer -> [Integer] -> Bool -> [Integer]
 additem _ lst False = lst
@@ -19,17 +16,13 @@ sieve _ [] False = True
 sieve x lst False = sieve x (tail lst) (check x (head lst))
 
 loop :: Integer -> Integer -> [Integer]-> IO ()
-loop _ 3 _ = return ()
-loop x end lst = do
-    let b = sieve x lst False
-    prnt x b
-    loop (x+1) (end-1) (additem x lst b)
+loop _ 3 lst = print lst
+loop x end lst = loop (x+1) (abs (end-1)) (additem x lst (sieve x lst False))
 
 main :: IO ()
 main = do
     putStrLn "Finding primes..."
     putStrLn "Enter max number to search to:"
     i <- getLine
-    putStrLn "\n2\n3"
     let z = read i :: Integer
     loop 4 z [2,3]
