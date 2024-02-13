@@ -20,4 +20,4 @@ main = do
     i <- getLine
     putStrLn "\n2\n3"
     let y = read i :: Integer
-    loop 4 (abs y)
+    loop 4 (max (abs y) 4)
